@@ -25,8 +25,8 @@ class SortableServiceProvider extends ServiceProvider
 
         $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
         $blade->extend(function ($view, $compiler) {
-            $pattern = $compiler->createMatcher('sortlink');
-            $replace = '<?php echo \Sedehi\Sortable\Sortable::link(array $2);?>';
+            $pattern = $compiler->createMatcher('sort');
+            $replace = '<?php echo \Sedehi\Sortable\Sortable::sort(array $2);?>';
 
             return preg_replace($pattern, $replace, $view);
         });

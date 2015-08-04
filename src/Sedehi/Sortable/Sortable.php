@@ -16,7 +16,7 @@ trait Sortable
         }
     }
 
-    public static function link(array $parameters)
+    public static function sort(array $parameters)
     {
         if (count($parameters) == 1) {
             $parameters[1] = ucfirst($parameters[0]);
@@ -34,7 +34,7 @@ trait Sortable
         $controller = str_replace($namespace.'\\', '', $controller);
 
         $url = action($controller, array_merge(Request::all(), $parameters));
-        
+
         return '<a href="'.$url.'"'.'>'.e($title).'</a>'.' '.'<i class="'.$icon.'"></i>';
     }
 
