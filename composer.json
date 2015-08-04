@@ -11,7 +11,8 @@
   "authors": [
     {
       "name": "Navid Sedehi",
-      "email": "navid.sedehi@gmail.com"
+      "email": "navid.sedehi@gmail.com",
+      "homepage": "http://sedehi.ir"
     }
   ],
   "require": {
