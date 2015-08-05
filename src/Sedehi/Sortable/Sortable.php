@@ -32,8 +32,10 @@ trait Sortable
         $controller = Request::route()->getAction()['controller'];
         $namespace  = Request::route()->getAction()['namespace'];
         $controller = str_replace($namespace.'\\', '', $controller);
+        $qs         = http_build_query(array_merge(Request::all(), $parameters));
 
-        $url = action($controller, array_merge(Request::all(), $parameters));
+        $url = action($controller).'?'.$qs;
+
 
         return '<a href="'.$url.'"'.'>'.e($title).'</a>'.' '.'<i class="'.$icon.'"></i>';
     }
