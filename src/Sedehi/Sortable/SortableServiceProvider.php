@@ -13,15 +13,13 @@ class SortableServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * Register the service provider.
+     * Bootstrap the application events.
      *
      * @return void
      */
-
-
     public function boot()
     {
-        $this->publishes([__DIR__.'/../../config/sortable.php' => config_path('sortable.php')]);
+        $this->package('sedehi/sortable');
 
         $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
         $blade->extend(function ($view, $compiler) {
@@ -32,10 +30,14 @@ class SortableServiceProvider extends ServiceProvider
         });
     }
 
-
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/sortable.php', 'sortable');
+        //
     }
 
     /**
@@ -45,8 +47,7 @@ class SortableServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return array();
     }
-
 
 }

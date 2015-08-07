@@ -3,14 +3,15 @@
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
+use Input;
 
 trait Sortable
 {
 
     public function scopeSortable($query)
     {
-        if (Request::has('sort') && Request::has('order') && $this->columnExists(Request::get('sort'))) {
-            return $query->orderBy(Request::get('sort'), Request::get('order'));
+        if (Input::has('sort') && Input::has('order') && $this->columnExists(Input::get('sort'))) {
+            return $query->orderBy(Input::get('sort'), Input::get('order'));
         } else {
             return $query;
         }
@@ -23,16 +24,16 @@ trait Sortable
         }
         $col   = $parameters[0];
         $title = $parameters[1];
-        $icon  = Config::get('sortable.sortable_icon');
+        $icon  = Config::get('sortable::sortable_icon');
 
         $parameters = [
             'sort'  => $col,
-            'order' => Request::get('order') === 'asc' ? 'desc' : 'asc'
+            'order' => Input::get('order') === 'asc' ? 'desc' : 'asc'
         ];
         $controller = Request::route()->getAction()['controller'];
         $namespace  = Request::route()->getAction()['namespace'];
         $controller = str_replace($namespace.'\\', '', $controller);
-        $qs         = http_build_query(array_merge(Request::all(), $parameters));
+        $qs         = http_build_query(array_merge(Input::all(), $parameters));
 
         $url = action($controller).'?'.$qs;
 

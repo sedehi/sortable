@@ -7,21 +7,23 @@
     "eloquent",
     "eloquent sort"
   ],
-  "license": "MIT",
   "authors": [
     {
       "name": "Navid Sedehi",
-      "email": "navid.sedehi@gmail.com",
+      "email": "Navid.sedehi@gmail.com",
       "homepage": "http://sedehi.ir"
     }
   ],
   "require": {
     "php": ">=5.4.0",
-    "illuminate/support": "5.0.*"
+    "illuminate/support": "4.2.*"
   },
   "autoload": {
+    "classmap": [
+      "src/migrations"
+    ],
     "psr-0": {
-      "Sedehi\\Sortable": "src/"
+      "Sedehi\\Sortable\\": "src/"
     }
   },
   "minimum-stability": "stable"
