@@ -30,9 +30,7 @@ trait Sortable
             'sort'  => $col,
             'order' => Input::get('order') === 'asc' ? 'desc' : 'asc'
         ];
-        $controller = Request::route()->getAction()['controller'];
-        $namespace  = Request::route()->getAction()['namespace'];
-        $controller = str_replace($namespace.'\\', '', $controller);
+        $controller = Route::currentRouteAction();
         $qs         = http_build_query(array_merge(Input::all(), $parameters));
 
         $url = action($controller).'?'.$qs;
