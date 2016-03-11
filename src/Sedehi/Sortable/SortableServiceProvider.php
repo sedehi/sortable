@@ -1,6 +1,8 @@
 <?php namespace Sedehi\Sortable;
 
 use Illuminate\Support\ServiceProvider;
+use Blade;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class SortableServiceProvider extends ServiceProvider
 {
@@ -23,12 +25,11 @@ class SortableServiceProvider extends ServiceProvider
     {
         $this->publishes([__DIR__.'/../../config/sortable.php' => config_path('sortable.php')]);
 
-        $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
-        $blade->extend(function ($view, $compiler) {
-            $pattern = $compiler->createMatcher('sort');
-            $replace = '<?php echo \Sedehi\Sortable\Sortable::sort(array $2);?>';
+        Blade::directive('sort', function ($expression) {
 
-            return preg_replace($pattern, $replace, $view);
+            list($field, $title) = explode(',', str_replace(['(', ')', '', "'"], '', $expression));
+
+            return '<?php echo \Sedehi\Sortable\Sortable::sort("'.$field.'","'.$title.'") ?>';
         });
     }
 
