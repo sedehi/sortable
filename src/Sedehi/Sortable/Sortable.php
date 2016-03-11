@@ -16,14 +16,10 @@ trait Sortable
         }
     }
 
-    public static function sort(array $parameters)
+    public static function sort($col, $title)
     {
-        if (count($parameters) == 1) {
-            $parameters[1] = ucfirst($parameters[0]);
-        }
-        $col   = $parameters[0];
-        $title = $parameters[1];
-        $icon  = Config::get('sortable.sortable_icon');
+
+        $icon = Config::get('sortable.sortable_icon');
 
         $parameters = [
             'sort'  => $col,
