@@ -26,8 +26,7 @@ trait Sortable
             'order' => Request::get('order') === 'asc' ? 'desc' : 'asc'
         ];
         $controller = Request::route()->getAction()['controller'];
-        $namespace  = Request::route()->getAction()['namespace'];
-        $controller = str_replace($namespace.'\\', '', $controller);
+        $controller = str_replace(app()->getNamespace().'Http\Controllers'.'\\', '', $controller);
         $qs         = http_build_query(array_merge(Request::all(), $parameters));
 
         $url = action($controller).'?'.$qs;
